@@ -13,4 +13,8 @@ public class BookRepository {
     public void save(Book book) {
         entityManager.persist(book);
     }
+
+    public Book findById(int id) {
+        return entityManager.find(Book.class, id);
+    }
 }

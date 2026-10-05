@@ -43,4 +43,11 @@ public class BookService {
         // Step 4 : send book object to repository
         bookRepository.save(book);
     }
+
+    public Book findById(int id) {
+        Book book = bookRepository.findById(id);
+        if(book == null)
+            throw new ResourceNotFoundException("Invalid Book ID");
+        return book;
+    }
 }
