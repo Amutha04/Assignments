@@ -33,8 +33,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(long id, String title, Genre genre, BookStatus status, Author author, Member member, int publishedYear) {
-        this.id = id;
+    public Book(String title, Genre genre, BookStatus status, Author author, Member member, int publishedYear) {
         this.title = title;
         this.genre = genre;
         this.status = status;
