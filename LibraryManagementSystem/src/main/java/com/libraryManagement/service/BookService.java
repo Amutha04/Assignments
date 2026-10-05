@@ -1,8 +1,10 @@
 package com.libraryManagement.service;
 
+import com.libraryManagement.dto.BookRespDto;
 import com.libraryManagement.enums.BookStatus;
 import com.libraryManagement.enums.Genre;
 import com.libraryManagement.exception.ResourceNotFoundException;
+import com.libraryManagement.mapper.BookMapper;
 import com.libraryManagement.model.Author;
 import com.libraryManagement.model.Book;
 import com.libraryManagement.model.Member;
@@ -12,6 +14,7 @@ import com.libraryManagement.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,5 +52,14 @@ public class BookService {
         if(book == null)
             throw new ResourceNotFoundException("Invalid Book ID");
         return book;
+    }
+
+    public List<BookRespDto> findAll() {
+        List<Book> list = bookRepository.findAll();
+        if(list == null || list.isEmpty())
+            throw new ResourceNotFoundException("Book Table is empty");
+        return list
+                .stream()
+                .map(BookMapper :: convertBookToDto).toList();
     }
 }
